@@ -1,10 +1,11 @@
-using System.ComponentModel.DataAnnotations;    //sets further requirements/rules for inputs 
+using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;    //sets further requirements/rules for inputs 
 namespace TodoApi.Models;
 
 public class TodoUser
 {
     [Key]
-    public long UserId { get; set; }
+    public int UserId { get; set; }
     [Required]
     [StringLength(50, MinimumLength = 3)]
     public required string UserName { get; set; }
@@ -24,6 +25,8 @@ public class TodoUser
     [Compare("UserPassword", ErrorMessage = "Passwords do not match.")]
     public required string ConfirmPassword { get; set; }
     // Navigation property
-    public ICollection<TodoItem>? TodoItems { get; set; } // Nullable navigation property
+    [JsonIgnore]
+    public ICollection<TodoItem> TodoItems { get; } = new List<TodoItem>();
+
 }
 

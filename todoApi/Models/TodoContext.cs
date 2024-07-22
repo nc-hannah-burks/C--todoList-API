@@ -16,14 +16,15 @@ public class TodoContext : DbContext
 
     public DbSet<TodoCompleteCount> TodoCompleteCount { get; set; } = null!;
 
-
+    public DbSet<TodoItemPost> TodoItemPost { get; set; } = null!;
     public DbSet<TodoUser> TodoUsers { get; set; } = null!;
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<TodoItem>()
             .HasOne(t => t.TodoUser)
-            .WithMany(u => u.TodoItems)
-            .HasForeignKey(t => t.UserId);
+            .WithMany(user => user.TodoItems)
+            .HasForeignKey(t => t.UserId)
+            .IsRequired();
     }
 
 }

@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;   //sets further requirements/rules for inputs 
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;   //sets further requirements/rules for inputs 
 namespace TodoApi.Models;
 
 
@@ -7,14 +8,13 @@ namespace TodoApi.Models;
 public class TodoItemDTO
 {
     public long Id { get; set; }
-    public string? Name { get; set; }
+    public required string Name { get; set; }
     public bool IsComplete { get; set; }
 
-    // Foreign key for TodoUser - THIS needs to be fixed to allow me to give the relevant userId in post
-    [ForeignKey("TodoUser")]
-    public int UserId { get; set; }
 
-    // Navigation property
-    public TodoUser? TodoUser { get; set; }
+    public string? Details { get; set; }
+    public int UserId { get; set; } // Required foreign key property
+    [JsonIgnore]
+    public TodoUser TodoUser { get; set; } = null!; // Required reference navigation to principal
 
 }

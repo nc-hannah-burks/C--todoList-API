@@ -24,33 +24,27 @@ public class TodoItemsController : ControllerBase
         .ToListAsync();
 
 
-        return todoItems.Select(ItemToDTO).ToList();
+
+        return Ok(todoItems);
     }
 
     // GET: api/TodoItems/5
     // <snippet_GetByID>
     [HttpGet("{id}")]
-    public async Task<ActionResult<TodoItemDTO>> GetTodoItem(long id, int todoUserId)
+    public async Task<ActionResult<TodoItem>> GetTodoItem(long id, int todoUserId)
     {
-        // Fetch the TodoItem by id and include the related TodoUser
         var todoItem = await _context.TodoItems
-            .Include(t => t.TodoUser)
-            .FirstOrDefaultAsync(t => t.Id == id);
+               .Where(t => t.Id == id && t.UserId == todoUserId)
+               .FirstOrDefaultAsync();
 
+        // Check if the item exists
         if (todoItem == null)
         {
-            return NotFound();
+            return NotFound(); // Return 404 Not Fsound if the item does not exist
         }
 
-        // Check if the current user is authorized
-        // Implement this method based on your authentication mechanism
-
-        if (todoItem.TodoUser.UserId != todoUserId)
-        {
-            return Forbid();
-        }
-
-        return ItemToDTO(todoItem);
+        // Return the found item with 200 OK status
+        return Ok(todoItem);
     }
 
     // </snippet_GetByID>
@@ -94,23 +88,39 @@ public class TodoItemsController : ControllerBase
     // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
     // <snippet_Create>
     [HttpPost]
-    public async Task<ActionResult<TodoItemDTO>> PostTodoItem(TodoItemDTO todoDTO)
+    public async Task<ActionResult<TodoItemDTO>> PostTodoItem(TodoItemPost toDoItemPost)
     {
-        var todoItem = new TodoItem
+        try
         {
-            IsComplete = todoDTO.IsComplete,
-            Name = todoDTO.Name,
-            TodoUser = todoDTO.TodoUser
+            var user = await _context.TodoUsers.FindAsync(toDoItemPost.UserId);
 
-        };
+            if (user == null)
+            {
+                return NotFound($"User with ID {toDoItemPost.UserId} not found.");
+            }
 
-        _context.TodoItems.Add(todoItem);
-        await _context.SaveChangesAsync();
+            var todoItem = new TodoItem
+            {
+                IsComplete = toDoItemPost.IsComplete,
+                Name = toDoItemPost.Name,
+                Details = toDoItemPost.Details,
+                UserId = toDoItemPost.UserId,
+                TodoUser = user
+            };
 
-        return CreatedAtAction(
-            nameof(GetTodoItem),
-            new { id = todoItem.Id },
-            ItemToDTO(todoItem));
+            _context.TodoItems.Add(todoItem);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction(
+                nameof(GetTodoItem),
+                new { id = todoItem.Id },
+                ItemToDTO(todoItem));
+        }
+        catch (Exception ex)
+        {
+            // Log the exception (ex) for further analysis
+            return StatusCode(500, $"Internal server error: {ex.Message}");
+        }
     }
     // </snippet_Create>
 
@@ -146,6 +156,9 @@ public class TodoItemsController : ControllerBase
            Id = todoItem.Id,
            Name = todoItem.Name,
            IsComplete = todoItem.IsComplete,
+           Details = todoItem.Details,
+           UserId = todoItem.UserId,
            TodoUser = todoItem.TodoUser
+
        };
-}
+};

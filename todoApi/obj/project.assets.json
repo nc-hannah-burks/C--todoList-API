@@ -8326,11 +8326,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/hannahburks/Documents/personal_projects/c-sharp-db/todoApi/todoApi/todoApi.csproj",
+      "projectUniqueName": "/Users/hannahburks/Library/Mobile Documents/com~apple~CloudDocs/personal_projects/c-sharp-db/todoApi/todoApi/todoApi.csproj",
       "projectName": "todoApi",
-      "projectPath": "/Users/hannahburks/Documents/personal_projects/c-sharp-db/todoApi/todoApi/todoApi.csproj",
+      "projectPath": "/Users/hannahburks/Library/Mobile Documents/com~apple~CloudDocs/personal_projects/c-sharp-db/todoApi/todoApi/todoApi.csproj",
       "packagesPath": "/Users/hannahburks/.nuget/packages/",
-      "outputPath": "/Users/hannahburks/Documents/personal_projects/c-sharp-db/todoApi/todoApi/obj/",
+      "outputPath": "/Users/hannahburks/Library/Mobile Documents/com~apple~CloudDocs/personal_projects/c-sharp-db/todoApi/todoApi/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/hannahburks/.nuget/NuGet/NuGet.Config"

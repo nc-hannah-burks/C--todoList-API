@@ -26,7 +26,7 @@ public class TodoUsersController : ControllerBase
     // GET: api/TodoUsers/5
     // <snippet_GetByID>
     [HttpGet("{id}")]
-    public async Task<ActionResult<TodoUser>> GetTodoUser(long id)
+    public async Task<ActionResult<TodoUser>> GetTodoUser(int id)
     {
         var todoUser = await _context.TodoUsers.FindAsync(id);
 
@@ -43,7 +43,7 @@ public class TodoUsersController : ControllerBase
     // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
     // <snippet_Update>
     [HttpPut("{id}")]
-    public async Task<IActionResult> PutUser(long id, TodoUser updatedUser)
+    public async Task<IActionResult> PutUser(int id, TodoUser updatedUser)
     {
         if (id != updatedUser.UserId)
         {
@@ -94,7 +94,7 @@ public class TodoUsersController : ControllerBase
 
     // DELETE: api/TodoUsers/5
     [HttpDelete("{id}")]
-    public async Task<IActionResult> DeleteTodoUser(long id)
+    public async Task<IActionResult> DeleteTodoUser(int id)
     {
         var deletedTodoUser = await _context.TodoUsers.FindAsync(id);
         if (deletedTodoUser == null)
@@ -108,7 +108,7 @@ public class TodoUsersController : ControllerBase
         return NoContent();
     }
 
-    private bool TodoUserExists(long id)
+    private bool TodoUserExists(int id)
     {
         return _context.TodoUsers.Any(e => e.UserId == id);
     }
