@@ -26,9 +26,9 @@ namespace todoApi.Controllers
         public async Task<TodoIncompleteCount> GetTodoincompleteCount(int todoUserId)
         {
             List<TodoItem> todoItems = await _context.TodoItems.ToListAsync();
-            IEnumerable<TodoItem> todoItems1 = todoItems.Where(toDo => toDo.IsComplete == false).Where(x => x.UserId == todoUserId); ;
+            IEnumerable<TodoItem> usersInCompletedTodoItems = todoItems.Where(toDo => toDo.IsComplete == false).Where(x => x.UserId == todoUserId); ;
 
-            int incompleteCount = todoItems1.Count();
+            int incompleteCount = usersInCompletedTodoItems.Count();
 
 
             // Create an instance of TodoCompleteCount and set the CompleteCount property

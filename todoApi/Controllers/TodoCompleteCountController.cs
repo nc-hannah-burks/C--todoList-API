@@ -26,9 +26,9 @@ namespace todoApi.Controllers
         public async Task<TodoCompleteCount> GetTodoCompleteCount(int todoUserId)
         {
             List<TodoItem> todoItems = await _context.TodoItems.ToListAsync();
-            IEnumerable<TodoItem> todoItems1 = todoItems.Where(toDo => toDo.IsComplete == true).Where(x => x.UserId == todoUserId);
+            IEnumerable<TodoItem> usersCompletedTodoItems = todoItems.Where(toDo => toDo.IsComplete == true).Where(x => x.UserId == todoUserId);
 
-            int completeCount = todoItems1.Count();
+            int completeCount = usersCompletedTodoItems.Count();
 
 
             // Create an instance of TodoCompleteCount and set the CompleteCount property
@@ -36,7 +36,7 @@ namespace todoApi.Controllers
 
             {
 
-                UserId = todoUserId,
+                UserId = todoUserId, //setting userId to given one
                 // Assuming you want to set a static ID or generate it as needed
                 CompleteCount = completeCount
             };
