@@ -8326,11 +8326,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/hannahburks/Library/Mobile Documents/com~apple~CloudDocs/personal_projects/c-sharp-db/todoApi/todoApi/todoApi.csproj",
+      "projectUniqueName": "/Users/hannahburks/Documents/Northcoders/PDT/C--todoList-API/todoApi/todoApi.csproj",
       "projectName": "todoApi",
-      "projectPath": "/Users/hannahburks/Library/Mobile Documents/com~apple~CloudDocs/personal_projects/c-sharp-db/todoApi/todoApi/todoApi.csproj",
+      "projectPath": "/Users/hannahburks/Documents/Northcoders/PDT/C--todoList-API/todoApi/todoApi.csproj",
       "packagesPath": "/Users/hannahburks/.nuget/packages/",
-      "outputPath": "/Users/hannahburks/Library/Mobile Documents/com~apple~CloudDocs/personal_projects/c-sharp-db/todoApi/todoApi/obj/",
+      "outputPath": "/Users/hannahburks/Documents/Northcoders/PDT/C--todoList-API/todoApi/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/hannahburks/.nuget/NuGet/NuGet.Config"
@@ -8339,6 +8339,7 @@
         "net8.0"
       ],
       "sources": {
+        "/usr/local/share/dotnet/library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -8418,7 +8419,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.201/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.401/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

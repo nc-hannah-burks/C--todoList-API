@@ -23,20 +23,24 @@ namespace todoApi.Controllers
 
         // GET: api/toDoCompleteCount
         [HttpGet]
-        public async Task<TodoCompleteCount> GetTodoCompleteCount()
+        public async Task<TodoCompleteCount> GetTodoCompleteCount(int todoUserId)
         {
             List<TodoItem> todoItems = await _context.TodoItems.ToListAsync();
-            IEnumerable<TodoItem> todoItems1 = todoItems.Where(toDo => toDo.IsComplete == true);
-            Console.WriteLine("Hannah testing");
+            IEnumerable<TodoItem> todoItems1 = todoItems.Where(toDo => toDo.IsComplete == true).Where(x => x.UserId == todoUserId);
+
             int completeCount = todoItems1.Count();
 
 
             // Create an instance of TodoCompleteCount and set the CompleteCount property
             var result = new TodoCompleteCount
+
             {
+
+                UserId = todoUserId,
                 // Assuming you want to set a static ID or generate it as needed
                 CompleteCount = completeCount
             };
+
 
             return result;
 
